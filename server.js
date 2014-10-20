@@ -4,10 +4,11 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || 8080;
+var port     = process.env.PORT || 4100;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
+var exphbs  = require('express3-handlebars');
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -27,7 +28,15 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set('view engine', 'ejs'); // set up ejs for templating
+app.engine('hbs', exphbs(
+	{
+		extname: '.hbs',
+		defaultLayout: 'Main/main.hbs',
+		layoutsDir: 'views'
+	}
+));
+app.set('view engine', 'hbs');
+app.use('/static',express.static(__dirname + '/static'));
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
