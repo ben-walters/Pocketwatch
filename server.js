@@ -8,7 +8,7 @@ var port     = process.env.PORT || 4100;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
-var exphbs  = require('express3-handlebars');
+var exphbs   = require('express3-handlebars');
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -27,16 +27,17 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(express.compress());
+
 
 app.engine('hbs', exphbs(
 	{
 		extname: '.hbs',
-		defaultLayout: 'Main/main.hbs',
 		layoutsDir: 'views'
 	}
 ));
 app.set('view engine', 'hbs');
-app.use('/static',express.static(__dirname + '/static'));
+
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
@@ -45,7 +46,9 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
+app.use('/static',express.static(__dirname + '/static'));
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
 
 // launch ======================================================================
 app.listen(port);

@@ -1,14 +1,18 @@
 require.config({
-    baseUrl: 'js/lib',
+	deps: ['/static/main.js'],
+    baseUrl: '/static/',
     paths: {
-        // the left side is the module ID,
-        // the right side is the path to
-        // the jQuery file, relative to baseUrl.
-        // Also, the path should NOT include
-        // the '.js' file extension. This example
-        // is using jQuery 1.9.0 located at
-        // js/lib/jquery-1.9.0.js, relative to
-        // the HTML page.
-        jquery: 'jquery-1.9.0'
+        underscore: 'lib/underscore',
+        backbone: 'lib/backbone',
+        layout: 'lib/layoutmanager.min',
+        jquery: 'lib/jquery-1.11.1.min',
+        core: 'lib/core',
+        handlebars: 'lib/handlebars'
+    },
+    shim: {
+	    'backbone': {
+	    	deps: ['underscore' , 'jquery' , 'handlebars'],
+            exports: 'Backbone'
+	    } 
     }
 });

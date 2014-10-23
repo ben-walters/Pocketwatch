@@ -3,9 +3,12 @@ module.exports = function(app, passport) {
 // normal routes ===============================================================
 
 	// show the home page (will also have our login links)
-	app.get('/', function(req, res) {
+	app.get('*', function(req, res) {
 		res.render('Dashboard/dashboard.hbs');
 	});
+
+
+	/* Commented on: 21 Oct 2014 by Bwalters
 	app.get('/navigation', function(req, res) {
 		res.render('Navigation/navigation.hbs');
 	});
@@ -23,10 +26,15 @@ module.exports = function(app, passport) {
 		res.redirect('/');
 	});
 
+	*/
+
+
+
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================
 
+/* Commented on: 21 Oct 2014 by Bwalters
 	// locally --------------------------------
 		// LOGIN ===============================
 		// show the login form
@@ -40,6 +48,7 @@ module.exports = function(app, passport) {
 			failureRedirect : '/login', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
+*/
 
 }
 
